@@ -1,7 +1,7 @@
 export interface CollectionItem {
 id: number,
 title: string,
-pictureUrl: string,
+image_url: string,
 price: number,
 currency: string,
 }

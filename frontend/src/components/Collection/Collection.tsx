@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import type { CollectionItem } from "../../types";
 import styles from "./Collection.module.scss";
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 export function Collection() {
 
@@ -38,12 +38,12 @@ export function Collection() {
 
                                 <div className={styles.gallery_tile}>
                                     <div className={styles.imageContainer}>
-                                        {/* <Link to={`/collection/${item.id}`}>
+                                        <Link to={`/collection/${item.id}`}>
                                             <img src={item.image_url}
                                                 alt={item.title}
                                             >
                                             </img>
-                                        </Link> */}
+                                        </Link>
                                     </div>
                                     <div className={styles.pictureDetails}>
                                         <div className={styles.name}>{item.title}</div>

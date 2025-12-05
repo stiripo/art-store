@@ -1,10 +1,14 @@
 import './App.css';
-import { Collection } from './components/Collection/Collection'
+import { Collection } from './components/Collection/Collection';
+import { BrowserRouter } from 'react-router-dom';
 
 function App() {
 
   return (
-   <Collection></Collection>
+    <BrowserRouter>
+      <Collection></Collection>
+    </BrowserRouter>
+
   )
 }
 
