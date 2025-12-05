@@ -1,12 +1,26 @@
 import './App.css';
 import { Collection } from './components/Collection/Collection';
-import { BrowserRouter } from 'react-router-dom';
+import { Item } from './components/Item/Item';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
 
   return (
     <BrowserRouter>
-      <Collection></Collection>
+     <Routes>
+      <Route
+        path='/'
+        element={<Collection />}>
+      </Route>
+      <Route
+        path='collection'
+        element={<Collection />}>
+      </Route>
+      <Route
+        path='collection/:id'
+        element={<Item />}>
+      </Route>
+    </Routes>
     </BrowserRouter>
 
   )
