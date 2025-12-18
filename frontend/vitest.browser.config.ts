@@ -5,10 +5,10 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   test: {
-    watch: false,
+    //watch: false,
     browser: {
       enabled: true,
-      headless: true, 
+      headless: false, 
       provider: playwright(),
       // https://vitest.dev/config/browser/playwright
       instances: [
