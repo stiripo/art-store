@@ -3,6 +3,14 @@ import {test, expect} from 'vitest';
 import App from './App';
 import { page } from 'vitest/browser';
 import { MemoryRouter } from 'react-router-dom';
+import { worker } from './mocks/browser';
+import { beforeAll, afterEach, afterAll } from 'vitest';
+
+
+beforeAll(() => worker.start())
+afterEach(() => worker.resetHandlers())
+afterAll(() => worker.stop())
+
 
 test('render the gallery on /', async () => {
   await render(
@@ -10,8 +18,11 @@ test('render the gallery on /', async () => {
       <App />
     </MemoryRouter>
 );
+
   const gallery = page.getByText(/Gallery/i);
-  expect(gallery).toBeInTheDocument();
+  await expect.element(gallery).toBeInTheDocument();
+
+
 });
 
 
@@ -24,7 +35,14 @@ test('renders Collection on /collection', async () => {
   );
 
   const gallery = page.getByText(/Gallery/i);
-  expect(gallery).toBeInTheDocument();
+  await expect.element(gallery).toBeInTheDocument();
+
+  const title = page.getByText(/Actress/i);
+  await expect.element(title).toBeInTheDocument();
+
+  const images = page.getByRole('img');
+  expect(images).not.toHaveLength(0);
+
 });
 
 test('renders Item on /collection/:id', async () => {
