@@ -14,7 +14,7 @@ afterAll(() => worker.stop())
 
 test('render the gallery on /', async () => {
   await render(
-  <MemoryRouter>
+    <MemoryRouter>
       <App />
     </MemoryRouter>
 );
@@ -22,9 +22,7 @@ test('render the gallery on /', async () => {
   const gallery = page.getByText(/Gallery/i);
   await expect.element(gallery).toBeInTheDocument();
 
-
 });
-
 
 
 test('renders Collection on /collection', async () => {
@@ -47,32 +45,26 @@ test('renders Collection on /collection', async () => {
 
 test('renders Item on /collection/:id', async () => {
   await render(
-    <MemoryRouter initialEntries={['/collection/1']}>
+    <MemoryRouter initialEntries={['/collection/2']}>
       <App />
     </MemoryRouter>
   );
 
   const images = page.getByRole('img');
   expect(images).toHaveLength(1);
+
 });
 
-// test('navigates to an item when clicking on the link', async () => {
-//   await render(
-//      <MemoryRouter initialEntries={['/collection']}>
-//       <App />
-//     </MemoryRouter>
-//   );
+test('clicking on an image leads to /collection/:id', async () => {
+  await render(
+    <MemoryRouter>
+      <App />
+    </MemoryRouter>
+  );
 
-  
+  const image = page.getByRole('img', {name: 'Actress'});
+  await expect.element(image).toBeInTheDocument();
+  await image.click();
 
-// const images = page.getByRole('img');
-// expect(images).toHaveLength(10);
-
-  // const link = page.getByRole('link', { name: 'Northern Lights'});
-  // expect(link).toBeInTheDocument();
-  // await link.click();
-
-  // const item = page.getByRole('img');
-  // expect(item).toHaveLength(1);
-
-// })
+  await expect(page.getByRole('img')).toHaveLength(1);
+})

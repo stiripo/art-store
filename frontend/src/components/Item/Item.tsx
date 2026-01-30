@@ -29,9 +29,8 @@ export function Item() {
     }
 
     useEffect(() => {
-        console.log(id);
         fetchItem();
-    }, []);
+    }, [id]);
 
     return (
         <>
