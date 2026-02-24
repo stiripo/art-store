@@ -6,6 +6,8 @@ body {
     margin: 40px auto;
     text-align: center;
     font-family: "Carattere", cursive;
+    
+    color: #2c2c2c;
     font-weight: 400;
     font-style: normal;
     font-size: 58px;
@@ -21,6 +23,10 @@ ul {
     justify-items: center;
 
     li {
+        .tileLink {
+             text-decoration: none;
+             color: #2c2c2c;;
+        }
 
         .gallery_tile {
             position: relative;

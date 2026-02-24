@@ -4,6 +4,16 @@ import { FilterForm } from "../FilterForm/FilterForm";
 import styles from "./Collection.module.scss";
 import { Link } from "react-router-dom"
 
+//TODO: View artwork overlay
+//TODO: apiResponse type
+//TODO: paginated data
+
+//TODO: more filters
+//TODO: favorites
+//TODO: state management
+
+//TODO: Item page
+
 export function Collection() {
 
     const [collection, setCollection] = useState<CollectionItem[]>([]);
@@ -16,11 +26,11 @@ export function Collection() {
     }, [collection, filterCategory]);
 
     const categories = useMemo(() => {
-            return ['All', ...new Set(collection.map((item => item.category)))]
-        }, [collection]
+        return ['All', ...new Set(collection.map((item => item.category)))]
+    }, [collection]
     )
 
-    const fetchCollection = async () : Promise<void> => {
+    const fetchCollection = async (): Promise<void> => {
         try {
             const response = await fetch('http://localhost:8080/collection');
             if (!response.ok) {
@@ -42,43 +52,53 @@ export function Collection() {
         fetchCollection();
     }, []);
 
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <div aria-busy="true">Loading...</div>;
 
     return (
-        <div>
-            <h2 className={styles.headline}>Gallery</h2>
-                <>
+        <>
+            {collection.length === 0 ? (<div>No artworks yet</div>) : (
+
+                <div>
+                    <h2 className={styles.headline}>Gallery</h2>
+
                     <FilterForm
-                    categories={categories}
-                    onFilterChange={setFilterCategory}
-                    filterCategory={filterCategory}/>
+                        categories={categories}
+                        onFilterChange={setFilterCategory}
+                        filterCategory={filterCategory} />
                     <div>
+
+                        <div aria-live="polite">
+                            {filteredCollection.length} artworks shown
+                        </div>
 
                         <ul>
                             {filteredCollection.map(item => (
                                 <li key={item.id}>
+                                    <Link to={`/collection/${item.id}`} className={styles.tileLink}>
+                                        <div className={styles.gallery_tile}>
+                                            <div className={styles.imageContainer}>
 
-                                    <div className={styles.gallery_tile}>
-                                        <div className={styles.imageContainer}>
-                                            <Link to={`/collection/${item.id}`}>
+
                                                 <img src={item.image_url}
-                                                    alt={item.title}
+                                                    alt={`Artwork titled ${item.title}`}
                                                 >
                                                 </img>
-                                            </Link>
-                                        </div>
-                                        <div className={styles.pictureDetails}>
-                                            <div className={styles.name}>{item.title}</div>
-                                            <div>{item.price} <span>{item.currency}</span></div>
-                                        </div>
-                                    </div>
 
+
+                                            </div>
+                                            <div className={styles.pictureDetails}>
+                                                <div className={styles.name}>{item.title}</div>
+                                                <div>{item.price} <span>{item.currency}</span></div>
+                                            </div>
+                                        </div>
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
 
                     </div>
-                </>
-        </div>
-    )
+                </div>
+            )
+            }
+        </>)
 }
