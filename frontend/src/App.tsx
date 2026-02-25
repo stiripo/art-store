@@ -2,6 +2,7 @@ import './App.css';
 import { Collection } from './components/Collection/Collection';
 import { Item } from './components/Item/Item';
 import { Routes, Route } from 'react-router-dom';
+import './App.css';
 
 function App() {
 

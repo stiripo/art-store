@@ -4,7 +4,6 @@ import { FilterForm } from "../FilterForm/FilterForm";
 import styles from "./Collection.module.scss";
 import { Link } from "react-router-dom"
 
-//TODO: View artwork overlay
 //TODO: apiResponse type
 //TODO: paginated data
 
@@ -60,17 +59,16 @@ export function Collection() {
 
                 <div>
                     <h2 className={styles.headline}>Gallery</h2>
-
-                    <FilterForm
-                        categories={categories}
-                        onFilterChange={setFilterCategory}
-                        filterCategory={filterCategory} />
-                    <div>
-
+                    <div className={styles.controlArea}>
+                        <FilterForm
+                            categories={categories}
+                            onFilterChange={setFilterCategory}
+                            filterCategory={filterCategory} />
                         <div aria-live="polite">
-                            {filteredCollection.length} artworks shown
+                            Showing {filteredCollection.length} artworks
                         </div>
-
+                    </div>
+                    <div>
                         <ul>
                             {filteredCollection.map(item => (
                                 <li key={item.id}>

@@ -1,3 +1,58 @@
+form {
+  margin: 40px 0;
+  justify-content: center;
+  font-size: 14px;
+}
+
 fieldset {
-    border: none;
+  border: none;
+  padding: 0;
+}
+
+.filterRow {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+legend {
+   margin: 0;
+  font-weight: 600;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.option {
+  display: inline-flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 8px;
+  cursor: pointer;
+
+  span {
+    padding: 5px 10px;
+    border-radius: 30px;
+    border: 1px solid #ccc;
+    background: white;
+    transition: all 0.2s ease;
+  }
+}
+
+.option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.option input:checked + span {
+  background: #2c2c2c;
+  color: white;
+  border-color: #2c2c2c;
+}
+
+.option input:focus-visible + span {
+  outline: 3px solid #7b6f82;
+  outline-offset: 2px;
 }
