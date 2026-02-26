@@ -3,6 +3,7 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
 background-color: rgb(216, 213, 216);
 }
 
+
 .headline {
     margin: 40px auto;
     text-align: center;
@@ -80,6 +81,15 @@ ul {
                 justify-self: center;
                 padding-bottom: 15px;
                 font-size: 0.8rem;
+
+                .heart {
+                    position: absolute;
+                    bottom: 5px;
+                    right: 5px;
+                    border: none;
+                    background-color: inherit;
+                    padding: 0;
+                }
 
                 .name {
                     font-size: 1rem;
