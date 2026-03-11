@@ -96,15 +96,18 @@ export function Collection() {
             {collection.length === 0 ? (<div>No artworks yet</div>) : (
 
                 <div>
-                    <h2 className={styles.headline}>Gallery</h2>
-                    <div className={styles.controlArea}>
-                        <FilterForm
-                            categories={categories}
-                            onFilterChange={setFilterCategory}
-                            filterCategory={filterCategory} />
-                        <div aria-live="polite">
-                            Showing {filteredCollection.length} artworks
+                    <div className={styles.top}>
+                        <div className={styles.controlArea}>
+                            <FilterForm
+                                categories={categories}
+                                onFilterChange={setFilterCategory}
+                                filterCategory={filterCategory} />
                         </div>
+                        <h2 className={styles.headline}>Gallery</h2>
+                    </div>
+
+                    <div aria-live="polite" className={styles.showing}>
+                        Showing {filteredCollection.length} artworks
                     </div>
                     <div>
                         <ul>

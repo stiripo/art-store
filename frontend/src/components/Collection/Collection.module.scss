@@ -1,21 +1,28 @@
 body {
-font-family: Verdana, Geneva, Tahoma, sans-serif;
+font-family: "Quicksand", sans-serif;
 background-color: rgb(216, 213, 216);
+}
+
+.top {
+    display: flex;
+    margin-top: 30px;
+    margin-bottom: 40px;
 }
 
 
 .headline {
-    margin: 40px auto;
     text-align: center;
-    color: #2c2c2c;
+    flex-grow: 1.5;
+    font-family: "Great Vibes", cursive;
     font-weight: 400;
-    font-style: italic;
-    font-size: 58px;
+    color: #2c2c2c;
+    font-size: 90px;
     text-shadow: 2px 2px rgb(123, 111, 130);
+    margin: 0;
   }
 
-  .controlArea {
-    padding-left: 50px;
+  .showing {
+    margin-left: 30px;
   }
 
 ul {
@@ -98,6 +105,12 @@ ul {
              }
         }
     }
+}
+
+@media only screen and (max-width: 768px) {
+  .top {
+    flex-flow:column-reverse;
+  }
 }
 
 
