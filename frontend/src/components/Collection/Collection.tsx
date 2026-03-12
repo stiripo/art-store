@@ -12,6 +12,7 @@ import { Heart } from 'lucide-react';
 //TODO: state management
 
 //TODO: Item page
+//TODO: top part - grid layout
 
 export function Collection() {
 
@@ -104,6 +105,9 @@ export function Collection() {
                                 filterCategory={filterCategory} />
                         </div>
                         <h2 className={styles.headline}>Gallery</h2>
+                        <div className={styles.wishlist}>
+                            <Heart size={16}/><span>Wishlist</span>
+                        </div>
                     </div>
 
                     <div aria-live="polite" className={styles.showing}>
@@ -133,7 +137,9 @@ export function Collection() {
                                                         ? "Remove from favorites"
                                                         : "Add to favorites"
                                                 }>
-                                                <Heart fill={favorites.has(item.id) ? "red" : "none"} />
+                                                <Heart
+                                                fill={favorites.has(item.id) ? "red" : "none"}
+                                                strokeWidth={1.5} />
                                             </button>
                                             <div className={styles.name}>{item.title}</div>
                                             <div>{item.price} <span>{item.currency}</span></div>

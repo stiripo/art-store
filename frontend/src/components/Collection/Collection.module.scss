@@ -4,22 +4,40 @@ background-color: rgb(216, 213, 216);
 }
 
 .top {
-    display: flex;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 2fr 1f 1f;
+    grid-template-areas: "filters headline wishlist";
     margin-top: 30px;
     margin-bottom: 40px;
+
+    .controlArea {
+    grid-area: filters;
+    }
+
+    .headline {
+        grid-area: headline;
+        justify-self: center;
+        font-family: "Great Vibes", cursive;
+        font-weight: 400;
+        color: #2c2c2c;
+        font-size: 90px;
+        text-shadow: 2px 2px rgb(123, 111, 130);
+        margin: 0;
+    }
+
+    .wishlist {
+        grid-area: wishlist;
+        justify-self: end;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 15px;
+    }
+
 }
 
 
-.headline {
-    text-align: center;
-    flex-grow: 1.5;
-    font-family: "Great Vibes", cursive;
-    font-weight: 400;
-    color: #2c2c2c;
-    font-size: 90px;
-    text-shadow: 2px 2px rgb(123, 111, 130);
-    margin: 0;
-  }
 
   .showing {
     margin-left: 30px;
@@ -109,7 +127,10 @@ ul {
 
 @media only screen and (max-width: 768px) {
   .top {
-    flex-flow:column-reverse;
+    grid-template-areas: 
+    "headline"
+    "filters"
+    "wishlist";
   }
 }
 
