@@ -1,6 +1,7 @@
 import './App.css';
 import { Collection } from './components/Collection/Collection';
 import { Item } from './components/Item/Item';
+import { Wishlist } from './components/Wishlist/Wishlist';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
 
@@ -15,6 +16,10 @@ function App() {
       <Route
         path='collection'
         element={<Collection />}>
+      </Route>
+      <Route
+        path='wishlist'
+        element={<Wishlist />}>
       </Route>
       <Route
         path='collection/:id'

@@ -4,6 +4,7 @@ import { FilterForm } from "../FilterForm/FilterForm";
 import styles from "./Collection.module.scss";
 import { Link } from "react-router-dom";
 import { Heart } from 'lucide-react';
+import { getFavoritesFromLocalStorage } from "../../utils";
 
 //TODO: apiResponse type
 //TODO: paginated data
@@ -15,26 +16,6 @@ import { Heart } from 'lucide-react';
 //TODO: top part - grid layout
 
 export function Collection() {
-
-    const getFavoritesFromLocalStorage = (): number[] => {
-        try {
-            const stored = localStorage.getItem('favorites');
-            if (!stored) return [];
-
-            const parsed: unknown = JSON.parse(stored);
-
-            if (
-                Array.isArray(parsed) &&
-                parsed.every(item => typeof item === 'number')
-            ) {
-                return parsed;
-            }
-
-            return [];
-        } catch {
-            return [];
-        }
-    }
 
     const [collection, setCollection] = useState<CollectionItem[]>([]);
     const [filterCategory, setFilterCategory] = useState<string>('All');
@@ -105,16 +86,18 @@ export function Collection() {
                                 filterCategory={filterCategory} />
                         </div>
                         <h2 className={styles.headline}>Gallery</h2>
-                        <div className={styles.wishlist}>
-                            <Heart size={16}/><span>Wishlist</span>
-                        </div>
+                        <Link to="/wishlist" className={styles.link_to_wishlist}>
+                            <div className={styles.wishlist_icon}>
+                                <Heart size={16} /><span>Wishlist</span>
+                            </div>
+                        </Link>
                     </div>
 
                     <div aria-live="polite" className={styles.showing}>
                         Showing {filteredCollection.length} artworks
                     </div>
                     <div>
-                        <ul>
+                        <ul className={styles.list_of_artworks}>
                             {filteredCollection.map(item => (
                                 <li key={item.id}>
 
@@ -138,8 +121,8 @@ export function Collection() {
                                                         : "Add to favorites"
                                                 }>
                                                 <Heart
-                                                fill={favorites.has(item.id) ? "red" : "none"}
-                                                strokeWidth={1.5} />
+                                                    fill={favorites.has(item.id) ? "red" : "none"}
+                                                    strokeWidth={1.5} />
                                             </button>
                                             <div className={styles.name}>{item.title}</div>
                                             <div>{item.price} <span>{item.currency}</span></div>

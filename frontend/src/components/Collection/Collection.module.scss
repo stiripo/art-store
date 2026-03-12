@@ -26,24 +26,27 @@ background-color: rgb(216, 213, 216);
         margin: 0;
     }
 
-    .wishlist {
+    .link_to_wishlist {
         grid-area: wishlist;
         justify-self: end;
-        display: flex;
-        align-items: center;
-        gap: 5px;
+        align-content: center;
         font-size: 15px;
+        color: inherit;
+        text-decoration: none;
+
+        .wishlist_icon {
+              display: flex;
+              align-items: center;
+              gap: 5px;
+        }
     }
-
 }
-
-
 
   .showing {
     margin-left: 30px;
   }
 
-ul {
+.list_of_artworks {
     list-style: none;
     padding: 0;
     display: grid;
