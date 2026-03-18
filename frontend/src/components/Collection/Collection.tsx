@@ -76,48 +76,49 @@ export function Collection({ favorites, toggleFavorites }: CollectionProps) {
                             </div>
                         </Link>
                     </div>
-
-                    <div aria-live="polite" className={styles.showing}>
-                        Showing {filteredCollection.length} artworks
-                    </div>
                     <div>
-                        <ul className={styles.list_of_artworks}>
-                            {filteredCollection.map(item => (
-                                <li key={item.id}>
+                        <div aria-live="polite" className={styles.showing}>
+                            Showing {filteredCollection.length} artworks
+                        </div>
+                        <div className={styles.main}>
+                            <ul className={styles.list_of_artworks}>
+                                {filteredCollection.map(item => (
+                                    <li key={item.id}>
 
-                                    <div className={styles.gallery_tile}>
-                                        <Link to={`/collection/${item.id}`} className={styles.tileLink}>
-                                            <div className={styles.imageContainer}>
-                                                <img src={item.image_url}
-                                                    alt={`Artwork titled ${item.title}`}>
-                                                </img>
+                                        <div className={styles.gallery_tile}>
+                                            <Link to={`/collection/${item.id}`} className={styles.tileLink}>
+                                                <div className={styles.imageContainer}>
+                                                    <img src={item.image_url}
+                                                        alt={`Artwork titled ${item.title}`}>
+                                                    </img>
+                                                </div>
+                                            </Link>
+                                            <div className={styles.pictureDetails}>
+                                                <button
+                                                    type="button"
+                                                    className={styles.heart}
+                                                    onClick={() => toggleFavorites(item.id)}
+                                                    aria-pressed={favorites.has(item.id)}
+                                                    aria-label={
+                                                        favorites.has(item.id)
+                                                            ? "Remove from favorites"
+                                                            : "Add to favorites"
+                                                    }>
+                                                    <Heart
+                                                        fill={favorites.has(item.id) ? "red" : "none"}
+                                                        strokeWidth={1.5} />
+                                                </button>
+                                                <div className={styles.name}>{item.title}</div>
+                                                <div>{item.price} <span>{item.currency}</span></div>
                                             </div>
-                                        </Link>
-                                        <div className={styles.pictureDetails}>
-                                            <button
-                                                type="button"
-                                                className={styles.heart}
-                                                onClick={() => toggleFavorites(item.id)}
-                                                aria-pressed={favorites.has(item.id)}
-                                                aria-label={
-                                                    favorites.has(item.id)
-                                                        ? "Remove from favorites"
-                                                        : "Add to favorites"
-                                                }>
-                                                <Heart
-                                                    fill={favorites.has(item.id) ? "red" : "none"}
-                                                    strokeWidth={1.5} />
-                                            </button>
-                                            <div className={styles.name}>{item.title}</div>
-                                            <div>{item.price} <span>{item.currency}</span></div>
+
                                         </div>
 
-                                    </div>
+                                    </li>
+                                ))}
+                            </ul>
 
-                                </li>
-                            ))}
-                        </ul>
-
+                        </div>
                     </div>
                 </div>
             )
