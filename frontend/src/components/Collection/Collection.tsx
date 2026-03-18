@@ -4,7 +4,8 @@ import { FilterForm } from "../FilterForm/FilterForm";
 import styles from "./Collection.module.scss";
 import { Link } from "react-router-dom";
 import { Heart } from 'lucide-react';
-import { getFavoritesFromLocalStorage } from "../../utils";
+import type { CollectionProps } from "../../types";
+
 
 //TODO: apiResponse type
 //TODO: paginated data
@@ -13,26 +14,13 @@ import { getFavoritesFromLocalStorage } from "../../utils";
 //TODO: state management
 
 //TODO: Item page
-//TODO: top part - grid layout
 
-export function Collection() {
+
+export function Collection({ favorites, toggleFavorites }: CollectionProps) {
 
     const [collection, setCollection] = useState<CollectionItem[]>([]);
     const [filterCategory, setFilterCategory] = useState<string>('All');
     const [loading, setLoading] = useState(true);
-    const [favorites, setFavorites] = useState<Set<number>>(() => new Set(getFavoritesFromLocalStorage()));
-
-    const handleFavorites = (id: number): void => {
-        setFavorites(prev => {
-            const updated = new Set(prev);
-            if (updated.has(id)) {
-                updated.delete(id);
-            } else {
-                updated.add(id);
-            }
-            return updated;
-        });
-    }
 
     const filteredCollection = useMemo(() => {
         if (filterCategory === "All") return collection;
@@ -65,10 +53,6 @@ export function Collection() {
     useEffect(() => {
         fetchCollection();
     }, []);
-
-    useEffect(() => {
-        localStorage.setItem('favorites', JSON.stringify([...favorites]));
-    }, [favorites]);
 
 
     if (loading) return <div aria-busy="true">Loading...</div>;
@@ -113,7 +97,7 @@ export function Collection() {
                                             <button
                                                 type="button"
                                                 className={styles.heart}
-                                                onClick={() => handleFavorites(item.id)}
+                                                onClick={() => toggleFavorites(item.id)}
                                                 aria-pressed={favorites.has(item.id)}
                                                 aria-label={
                                                     favorites.has(item.id)
