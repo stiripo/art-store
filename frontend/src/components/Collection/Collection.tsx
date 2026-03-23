@@ -8,9 +8,14 @@ import type { CollectionProps } from "../../types";
 
 //TODO: apiResponse type
 //TODO: paginated data
-
 //TODO: more filters
 //TODO: Item page
+
+//TODO: mobile styles improvements
+//TODO: images ratio
+//TODO: accessiblity
+//TODO: performance optimization
+
 
 
 export function Collection({ collection, favorites, toggleFavorites, loading }: CollectionProps) {
@@ -77,8 +82,9 @@ export function Collection({ collection, favorites, toggleFavorites, loading }: 
                                                             : "Add to favorites"
                                                     }>
                                                     <Heart
-                                                        fill={favorites.has(item.id) ? "red" : "none"}
-                                                        strokeWidth={1.5} />
+                                                        fill={favorites.has(item.id) ? "#e11d48" : "none"}
+                                                        stroke={favorites.has(item.id) ? "#b91c1c" : "#39383b"}
+                                                        strokeWidth={1.3} />
                                                 </button>
                                                 <div className={styles.name}>{item.title}</div>
                                                 <div>{item.price} <span>{item.currency}</span></div>
