@@ -8,10 +8,13 @@ category: string,
 }
 
 export interface CollectionProps {
+    collection: CollectionItem[],
     favorites: Set<number>,
     toggleFavorites: (id: number) => void,
+    loading: boolean
 }
 
 export interface WishlistProps {
+    collection: CollectionItem[],
     favorites: Set<number>,
 }

@@ -1,5 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
-import type { CollectionItem } from "../../types";
+import { useState, useMemo } from "react";
 import { FilterForm } from "../FilterForm/FilterForm";
 import styles from "./Collection.module.scss";
 import { Link } from "react-router-dom";
@@ -11,16 +10,12 @@ import type { CollectionProps } from "../../types";
 //TODO: paginated data
 
 //TODO: more filters
-//TODO: state management
-
 //TODO: Item page
 
 
-export function Collection({ favorites, toggleFavorites }: CollectionProps) {
+export function Collection({ collection, favorites, toggleFavorites, loading }: CollectionProps) {
 
-    const [collection, setCollection] = useState<CollectionItem[]>([]);
     const [filterCategory, setFilterCategory] = useState<string>('All');
-    const [loading, setLoading] = useState(true);
 
     const filteredCollection = useMemo(() => {
         if (filterCategory === "All") return collection;
@@ -31,29 +26,6 @@ export function Collection({ favorites, toggleFavorites }: CollectionProps) {
         return ['All', ...new Set(collection.map((item => item.category)))]
     }, [collection]
     )
-
-    const fetchCollection = async (): Promise<void> => {
-        try {
-            const response = await fetch('http://localhost:8080/collection');
-            if (!response.ok) {
-                throw new Error('Error fetching data')
-            }
-            const data = await response.json() as CollectionItem[];
-            setCollection(data);
-        }
-        catch (error) {
-            console.error(error);
-            console.log('Error fetching data')
-        }
-        finally {
-            setLoading(false);
-        }
-    }
-
-    useEffect(() => {
-        fetchCollection();
-    }, []);
-
 
     if (loading) return <div aria-busy="true">Loading...</div>;
 

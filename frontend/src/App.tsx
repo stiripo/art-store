@@ -6,10 +6,13 @@ import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import { getFavoritesFromLocalStorage } from "./utils";
 import { useState, useEffect } from 'react';
+import type { CollectionItem } from './types';
 
 function App() {
 
-  const [favorites, setFavorites] = useState<Set<number>>(() => new Set(getFavoritesFromLocalStorage()));
+    const [collection, setCollection] = useState<CollectionItem[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [favorites, setFavorites] = useState<Set<number>>(() => new Set(getFavoritesFromLocalStorage()));
 
   const handleFavorites = (id: number): void => {
     setFavorites(prev => {
@@ -23,6 +26,28 @@ function App() {
     });
   }
 
+   const fetchCollection = async (): Promise<void> => {
+        try {
+            const response = await fetch('http://localhost:8080/collection');
+            if (!response.ok) {
+                throw new Error('Error fetching data')
+            }
+            const data = await response.json() as CollectionItem[];
+            setCollection(data);
+        }
+        catch (error) {
+            console.error(error);
+            console.log('Error fetching data')
+        }
+        finally {
+            setLoading(false);
+        }
+    }
+
+  useEffect(() => {
+        fetchCollection();
+    }, []);
+
   useEffect(() => {
     localStorage.setItem('favorites', JSON.stringify([...favorites]));
   }, [favorites]);
@@ -34,8 +59,10 @@ function App() {
         path='/'
         element={
           <Collection
+            collection={collection}
             favorites={favorites}
             toggleFavorites={handleFavorites}
+            loading={loading}
           />
         }>
       </Route>
@@ -43,8 +70,10 @@ function App() {
         path='collection'
         element={
           <Collection
+            collection={collection}
             favorites={favorites}
             toggleFavorites={handleFavorites}
+            loading={loading}
           />
         }>
       </Route>
@@ -52,6 +81,7 @@ function App() {
         path='wishlist'
         element={
           <Wishlist
+            collection={collection}
             favorites={favorites}
           />
         }>

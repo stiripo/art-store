@@ -1,0 +1,109 @@
+@use '../../styles/variables' as *;
+
+.wishlist {
+  padding: $gap;
+  background: linear-gradient(180deg,#fbfdff 0,#fff 100%);
+  border-radius: $radius;
+  border: 1px solid $border;
+  box-shadow: $shadow;
+}
+
+.title {
+  margin: 0 0 ($gap / 2) 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: $gap;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 12px;
+  background: $bg;
+  border: 1px solid $border;
+  border-radius: $radius;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+  cursor: default;
+}
+.item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(15,23,42,0.08);
+  border-color: rgba(37,99,235,0.12);
+}
+
+.image {
+  flex: 0 0 84px;
+  height: 84px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #f3f4f6;
+  display: block;
+}
+.image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.itemTitle {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #0f172a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.category {
+  font-size: 0.85rem;
+  color: $muted;
+}
+
+.price {
+  margin-top: auto;
+  font-weight: 700;
+  color: $accent;
+  font-size: 0.95rem;
+}
+
+.empty {
+  padding: $gap * 1.5;
+  text-align: center;
+  color: $muted;
+  font-size: 0.95rem;
+}
+
+/* Responsive tweaks */
+@media (max-width: 520px) {
+  .list {
+    grid-template-columns: 1fr;
+  }
+  .item {
+    gap: 10px;
+    padding: 10px;
+  }
+  .image {
+    flex: 0 0 64px;
+    height: 64px;
+    border-radius: 6px;
+  }
+}
