@@ -11,8 +11,6 @@ import type { CollectionProps } from "../../types";
 //TODO: more filters
 //TODO: Item page
 
-//TODO: mobile styles improvements
-//TODO: images ratio
 //TODO: accessiblity
 //TODO: performance optimization
 
