@@ -36,7 +36,7 @@ export function Collection({ collection, favorites, toggleFavorites, loading }: 
         <>
             {collection.length === 0 ? (<div>No artworks yet</div>) : (
 
-                <div>
+                <section>
                     <div className={styles.top}>
                         <div className={styles.controlArea}>
                             <FilterForm
@@ -51,7 +51,7 @@ export function Collection({ collection, favorites, toggleFavorites, loading }: 
                             </div>
                         </Link>
                     </div>
-                    <div>
+                    <section>
                         <div aria-live="polite" className={styles.showing}>
                             Showing {filteredCollection.length} artworks
                         </div>
@@ -60,7 +60,7 @@ export function Collection({ collection, favorites, toggleFavorites, loading }: 
                                 {filteredCollection.map(item => (
                                     <li key={item.id}>
 
-                                        <div className={styles.gallery_tile}>
+                                        <article className={styles.gallery_tile}>
                                             <Link to={`/collection/${item.id}`} className={styles.tileLink}>
                                                 <div className={styles.imageContainer}>
                                                     <img src={item.image_url}
@@ -88,15 +88,15 @@ export function Collection({ collection, favorites, toggleFavorites, loading }: 
                                                 <div>{item.price} <span>{item.currency}</span></div>
                                             </div>
 
-                                        </div>
+                                        </article>
 
                                     </li>
                                 ))}
                             </ul>
 
                         </div>
-                    </div>
-                </div>
+                    </section>
+                </section>
             )
             }
         </>)
