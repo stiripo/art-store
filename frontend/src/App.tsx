@@ -1,9 +1,7 @@
-import './App.css';
 import { Collection } from './components/Collection/Collection';
 import { Item } from './components/Item/Item';
 import { Wishlist } from './components/Wishlist/Wishlist';
 import { Routes, Route } from 'react-router-dom';
-import './App.css';
 import { getFavoritesFromLocalStorage } from "./utils";
 import { useState, useEffect } from 'react';
 import type { CollectionItem } from './types';
@@ -83,6 +81,7 @@ function App() {
           <Wishlist
             collection={collection}
             favorites={favorites}
+            onRemove={handleFavorites}
           />
         }>
       </Route>

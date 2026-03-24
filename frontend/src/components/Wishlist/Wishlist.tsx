@@ -1,7 +1,8 @@
 import type { WishlistProps } from "../../types"
 import styles from "./Wishlist.module.scss"
+import { Heart } from 'lucide-react'
 
-export function Wishlist({ collection, favorites }: WishlistProps) {
+export function Wishlist({ collection, favorites, onRemove }: WishlistProps) {
 
 	const favoriteItems = collection.filter(item => favorites.has(item.id))
 
@@ -21,9 +22,22 @@ export function Wishlist({ collection, favorites }: WishlistProps) {
 
 							<div className={styles.details}>
 								<div className={styles.itemTitle}>{item.title}</div>
-								<div className={styles.category}>{item.category}</div>
+								<div className={styles.medium}>{item.medium}</div>
 								<div className={styles.price}>{item.price}</div>
 							</div>
+							<button
+								type="button"
+								className={styles.removeButton}
+								onClick={() => onRemove(item.id)}
+								aria-label={`Remove ${item.title} from wishlist`}
+							>
+								<Heart
+									fill="#e11d48"
+									stroke="#b91c1c"
+									strokeWidth={1.3}
+									size={20}
+								/>
+							</button>
 						</li>
 					))}
 				</ul>

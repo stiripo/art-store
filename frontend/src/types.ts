@@ -5,7 +5,7 @@ image_url: string,
 price?: number,
 currency?: string,
 category: string,
-}
+medium?: string}
 
 export interface CollectionProps {
     collection: CollectionItem[],
@@ -17,4 +17,5 @@ export interface CollectionProps {
 export interface WishlistProps {
     collection: CollectionItem[],
     favorites: Set<number>,
+    onRemove: (id: number) => void,
 }
