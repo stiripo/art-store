@@ -42,6 +42,15 @@
   border-color: rgba(37,99,235,0.12);
 }
 
+.itemLink {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  flex: 1;
+  text-decoration: none;
+  color: inherit;
+}
+
 .image {
   flex: 0 0 84px;
   height: 84px;

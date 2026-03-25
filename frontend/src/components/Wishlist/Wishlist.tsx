@@ -1,4 +1,5 @@
 import type { WishlistProps } from "../../types"
+import { Link } from "react-router-dom"
 import styles from "./Wishlist.module.scss"
 import { Heart } from 'lucide-react'
 
@@ -16,15 +17,17 @@ export function Wishlist({ collection, favorites, onRemove }: WishlistProps) {
 				<ul className={styles.list}>
 					{favoriteItems.map(item => (
 						<li key={item.id} className={styles.item}>
-							<div className={styles.image}>
-								<img src={item.image_url} alt={item.title} />
-							</div>
+							<Link to={`/collection/${item.id}`} className={styles.itemLink}>
+								<div className={styles.image}>
+									<img src={item.image_url} alt={item.title} />
+								</div>
 
-							<div className={styles.details}>
-								<div className={styles.itemTitle}>{item.title}</div>
-								<div className={styles.medium}>{item.medium}</div>
-								<div className={styles.price}>{item.price}</div>
-							</div>
+								<div className={styles.details}>
+									<div className={styles.itemTitle}>{item.title}</div>
+									<div className={styles.medium}>{item.medium}</div>
+									<div className={styles.price}>{item.price}</div>
+								</div>
+							</Link>
 							<button
 								type="button"
 								className={styles.removeButton}
