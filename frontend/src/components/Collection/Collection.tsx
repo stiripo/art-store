@@ -6,16 +6,6 @@ import { Heart } from 'lucide-react';
 import type { CollectionProps } from "../../types";
 
 
-//TODO: apiResponse type
-//TODO: paginated data
-//TODO: more filters
-//TODO: Item page
-
-//TODO: accessiblity
-//TODO: performance optimization
-
-
-
 export function Collection({ collection, favorites, toggleFavorites, loading }: CollectionProps) {
 
     const [filterCategory, setFilterCategory] = useState<string>('All');
@@ -34,7 +24,7 @@ export function Collection({ collection, favorites, toggleFavorites, loading }: 
 
     return (
         <>
-            {collection.length === 0 ? (<div>No artworks yet</div>) : (
+            {collection.length === 0 ? (<div role="status" aria-live="polite">No artworks yet</div>) : (
 
                 <section>
                     <div className={styles.top}>

@@ -40,10 +40,16 @@ background-color: $lilac;
         padding: 8px 12px;
         border-radius: $radius;
         transition: background-color 0.2s ease;
+    }
 
-        &:hover {
-          background-color: rgba(255, 255, 255, 0.3);
-        }
+    .link_to_wishlist:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .link_to_wishlist:focus-visible {
+      outline: 2px solid #2563eb;
+      outline-offset: 2px;
+    }
 
         .wishlist_icon {
               display: flex;
@@ -51,7 +57,7 @@ background-color: $lilac;
               gap: 5px;
         }
     }
-}
+
 
   .showing {
     position: relative;
@@ -121,6 +127,10 @@ background-color: $lilac;
                 z-index: 1000;
             }
 
+            &:has(.tileLink:focus-visible) {
+                box-shadow: 0 0 0 3px #2563eb, 5px 5px 10px rgb(83, 79, 79);
+            }
+
             .imageContainer {
                 padding: 20px 20px 10px;
                 position: relative;
@@ -181,6 +191,11 @@ background-color: $lilac;
 
                 .heart:active {
                     transform: scale(0.95);
+                }
+
+                .heart:focus-visible {
+                    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #2563eb;
+                    border-radius: 4px;
                 }
 
                 .name {

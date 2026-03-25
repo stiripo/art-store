@@ -46,6 +46,11 @@ legend {
   pointer-events: none;
 }
 
+.option input:focus-visible + span {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
 .option input:checked + span {
   background: #2c2c2c;
   color: white;

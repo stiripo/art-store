@@ -74,6 +74,11 @@
     transform: scale(0.95);
 }
 
+.heart:focus-visible {
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #2563eb;
+    border-radius: 4px;
+}
+
 .meta {
     display: flex;
     gap: 16px;

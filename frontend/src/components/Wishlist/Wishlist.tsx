@@ -12,7 +12,7 @@ export function Wishlist({ collection, favorites, onRemove }: WishlistProps) {
 			<h2 className={styles.title}>Items on your wishlist</h2>
 
 			{favoriteItems.length === 0 ? (
-				<div className={styles.empty}>You have no items on your wishlist.</div>
+			<div className={styles.empty} role="status" aria-live="polite">You have no items on your wishlist.</div>
 			) : (
 				<ul className={styles.list}>
 					{favoriteItems.map(item => (
