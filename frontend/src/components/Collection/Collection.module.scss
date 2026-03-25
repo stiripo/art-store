@@ -168,6 +168,19 @@ background-color: $lilac;
                     border: none;
                     background-color: inherit;
                     padding: 0;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: transform 160ms ease;
+                }
+
+                .heart:hover {
+                    transform: scale(1.1);
+                }
+
+                .heart:active {
+                    transform: scale(0.95);
                 }
 
                 .name {
