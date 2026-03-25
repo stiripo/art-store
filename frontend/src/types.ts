@@ -19,3 +19,8 @@ export interface WishlistProps {
     favorites: Set<number>,
     onRemove: (id: number) => void,
 }
+
+export interface ItemProps {
+    favorites: Set<number>,
+    toggleFavorites: (id: number) => void,
+}

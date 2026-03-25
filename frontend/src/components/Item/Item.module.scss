@@ -1,9 +1,159 @@
-.container {
-    padding: 20px 20px 10px;
+@use '../../styles/variables' as *;
 
-    img {
-        max-width: 90vw;
-        max-height: 90vh;
-        object-fit: contain;
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, #fbfdff 0, #fff 100%);
+    border-radius: $radius;
+    margin: 20px;
+}
+
+.imageWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f9fafb;
+    border-radius: $radius;
+    border: 1px solid $border;
+    padding: 20px;
+    min-height: 500px;
+}
+
+.imageWrapper img {
+    max-width: 100%;
+    max-height: 600px;
+    object-fit: contain;
+    display: block;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    justify-content: flex-start;
+    padding: 20px 0;
+}
+
+.header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+    line-height: 1.2;
+    flex: 1;
+}
+
+.heart {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 160ms ease;
+    flex-shrink: 0;
+}
+
+.heart:hover {
+    transform: scale(1.1);
+}
+
+.heart:active {
+    transform: scale(0.95);
+}
+
+.meta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 0.95rem;
+    color: #6b7280;
+}
+
+.category {
+    display: flex;
+    gap: 6px;
+}
+
+.category::before {
+    content: "Category:";
+    font-weight: 600;
+    color: #4b5563;
+}
+
+.medium {
+    display: flex;
+    gap: 6px;
+}
+
+.medium::before {
+    content: "Medium:";
+    font-weight: 600;
+    color: #4b5563;
+}
+
+.priceSection {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.price {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: $accent;
+}
+
+.currency {
+    font-size: 0.95rem;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.error {
+    padding: 40px;
+    text-align: center;
+    color: #dc2626;
+    background: #fee2e2;
+    border: 1px solid #fca5a5;
+    border-radius: $radius;
+    margin: 20px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 20px;
+        margin: 10px;
+    }
+
+    .imageWrapper {
+        min-height: 300px;
+    }
+
+    .imageWrapper img {
+        max-height: 400px;
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .price {
+        font-size: 1.5rem;
     }
 }

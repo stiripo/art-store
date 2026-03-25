@@ -1,10 +1,11 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import type { CollectionItem } from "../../types";
+import { Heart } from 'lucide-react';
+import type { CollectionItem, ItemProps } from "../../types";
 import styles from "./Item.module.scss"
 
 
-export function Item() {
+export function Item({ favorites, toggleFavorites }: ItemProps) {
 
     const { id } = useParams();
 
@@ -30,14 +31,50 @@ export function Item() {
 
     useEffect(() => {
         fetchItem();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
 
     return (
         <>
-            {error ? (<div>{error}</div>) : (
-                <div className={styles.container}>
-                    <img src={item.image_url} alt={item.title}></img>
-                </div>
+            {error ? (<div className={styles.error}>{error}</div>) : (
+                <article className={styles.container}>
+                    <div className={styles.imageWrapper}>
+                        <img src={item.image_url} alt={item.title} />
+                    </div>
+                    <div className={styles.details}>
+                        <div className={styles.header}>
+                            <h1 className={styles.title}>{item.title}</h1>
+                            <button
+                                type="button"
+                                className={styles.heart}
+                                onClick={() => toggleFavorites(item.id)}
+                                aria-pressed={favorites.has(item.id)}
+                                aria-label={
+                                    favorites.has(item.id)
+                                        ? "Remove from favorites"
+                                        : "Add to favorites"
+                                }
+                            >
+                                <Heart
+                                    fill={favorites.has(item.id) ? "#e11d48" : "none"}
+                                    stroke={favorites.has(item.id) ? "#b91c1c" : "#39383b"}
+                                    strokeWidth={1.3}
+                                    size={24}
+                                />
+                            </button>
+                        </div>
+                        <div className={styles.meta}>
+                            {item.category && <span className={styles.category}>{item.category}</span>}
+                            {item.medium && <span className={styles.medium}>{item.medium}</span>}
+                        </div>
+                        {item.price && (
+                            <div className={styles.priceSection}>
+                                <span className={styles.price}>{item.price}</span>
+                                {item.currency && <span className={styles.currency}>{item.currency}</span>}
+                            </div>
+                        )}
+                    </div>
+                </article>
             )}
         </>
     )

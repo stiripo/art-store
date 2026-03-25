@@ -87,7 +87,9 @@ function App() {
       </Route>
       <Route
         path='collection/:id'
-        element={<Item />}>
+        element={<Item 
+        favorites={favorites}
+        toggleFavorites={handleFavorites}/>}>
       </Route>
     </Routes>
   )
