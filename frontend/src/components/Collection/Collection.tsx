@@ -47,14 +47,15 @@ export function Collection({ collection, favorites, toggleFavorites, loading }: 
                         </div>
                         <div className={styles.main}>
                             <ul className={styles.list_of_artworks}>
-                                {filteredCollection.map(item => (
+                                {filteredCollection.map((item, index) => (
                                     <li key={item.id}>
 
                                         <article className={styles.gallery_tile}>
                                             <Link to={`/collection/${item.id}`} className={styles.tileLink}>
                                                 <div className={styles.imageContainer}>
                                                     <img src={item.image_url}
-                                                        alt={`Artwork titled ${item.title}`}>
+                                                        alt={`Artwork titled ${item.title}`}
+                                                        fetchPriority={index < 3 ? 'high' : 'auto'}>
                                                     </img>
                                                 </div>
                                             </Link>
