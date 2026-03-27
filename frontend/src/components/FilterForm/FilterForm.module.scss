@@ -62,9 +62,13 @@ legend {
   outline-offset: 2px;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 600px) {
   form {
     margin: 12px 0;
+  }
+
+  legend {
+    font-size: 0.9rem;
   }
 
   .option {
