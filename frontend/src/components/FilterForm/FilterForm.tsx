@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import styles from './FilterForm.module.scss';
 
 
@@ -7,7 +8,7 @@ interface FilterFormProps {
     onFilterChange: (category: string) => void,
 }
 
-export function FilterForm({ categories, filterCategory, onFilterChange }: FilterFormProps) {
+export const FilterForm = memo(function FilterForm({ categories, filterCategory, onFilterChange }: FilterFormProps) {
 
     const options = categories.map((cat) =>
         <label key={cat} className={styles.option}>
@@ -32,4 +33,4 @@ export function FilterForm({ categories, filterCategory, onFilterChange }: Filte
 
         </form>
     )
-}
+})
