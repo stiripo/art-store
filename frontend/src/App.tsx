@@ -1,10 +1,11 @@
-import { Collection } from './components/Collection/Collection';
-import { Item } from './components/Item/Item';
-import { Wishlist } from './components/Wishlist/Wishlist';
 import { Routes, Route } from 'react-router-dom';
 import { getFavoritesFromLocalStorage } from "./utils";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import type { CollectionItem } from './types';
+
+const Collection = lazy(() => import('./components/Collection/Collection').then(m => ({ default: m.Collection })));
+const Item = lazy(() => import('./components/Item/Item').then(m => ({ default: m.Item })));
+const Wishlist = lazy(() => import('./components/Wishlist/Wishlist').then(m => ({ default: m.Wishlist })));
 
 function App() {
 
@@ -52,46 +53,48 @@ function App() {
 
 
   return (
-    <Routes>
-      <Route
-        path='/'
-        element={
-          <Collection
-            collection={collection}
-            favorites={favorites}
-            toggleFavorites={handleFavorites}
-            loading={loading}
-          />
-        }>
-      </Route>
-      <Route
-        path='collection'
-        element={
-          <Collection
-            collection={collection}
-            favorites={favorites}
-            toggleFavorites={handleFavorites}
-            loading={loading}
-          />
-        }>
-      </Route>
-      <Route
-        path='wishlist'
-        element={
-          <Wishlist
-            collection={collection}
-            favorites={favorites}
-            onRemove={handleFavorites}
-          />
-        }>
-      </Route>
-      <Route
-        path='collection/:id'
-        element={<Item 
-        favorites={favorites}
-        toggleFavorites={handleFavorites}/>}>
-      </Route>
-    </Routes>
+    <Suspense fallback={<div aria-busy="true">Loading...</div>}>
+      <Routes>
+        <Route
+          path='/'
+          element={
+            <Collection
+              collection={collection}
+              favorites={favorites}
+              toggleFavorites={handleFavorites}
+              loading={loading}
+            />
+          }>
+        </Route>
+        <Route
+          path='collection'
+          element={
+            <Collection
+              collection={collection}
+              favorites={favorites}
+              toggleFavorites={handleFavorites}
+              loading={loading}
+            />
+          }>
+        </Route>
+        <Route
+          path='wishlist'
+          element={
+            <Wishlist
+              collection={collection}
+              favorites={favorites}
+              onRemove={handleFavorites}
+            />
+          }>
+        </Route>
+        <Route
+          path='collection/:id'
+          element={<Item 
+          favorites={favorites}
+          toggleFavorites={handleFavorites}/>}>
+        </Route>
+      </Routes>
+    </Suspense>
   )
 }
 

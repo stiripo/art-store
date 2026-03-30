@@ -60,6 +60,7 @@ export function Collection({ collection, favorites, toggleFavorites, loading }: 
                                                     ${item.image_url}-600.webp 600w`}
                                                         sizes="(width <= 600px) 145px, 235px"
                                                         alt={`Artwork titled ${item.title}`}
+                                                        loading={index < 3 ? 'eager' : 'lazy'}
                                                         fetchPriority={index < 3 ? 'high' : 'auto'}>
                                                     </img>
                                                 </div>
