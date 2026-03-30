@@ -53,7 +53,12 @@ export function Collection({ collection, favorites, toggleFavorites, loading }: 
                                         <article className={styles.gallery_tile}>
                                             <Link to={`/collection/${item.id}`} className={styles.tileLink}>
                                                 <div className={styles.imageContainer}>
-                                                    <img src={item.image_url}
+                                                    <img
+                                                        src={item.image_url}
+                                                        srcSet={`${item.image_url}-160.webp 160w,
+                                                        ${item.image_url}-300.webp 300w,
+                                                    ${item.image_url}-600.webp 600w`}
+                                                        sizes="(width <= 600px) 145px, 235px"
                                                         alt={`Artwork titled ${item.title}`}
                                                         fetchPriority={index < 3 ? 'high' : 'auto'}>
                                                     </img>

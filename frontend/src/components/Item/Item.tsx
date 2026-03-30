@@ -39,7 +39,14 @@ export function Item({ favorites, toggleFavorites }: ItemProps) {
             {error ? (<div className={styles.error}>{error}</div>) : (
                 <article className={styles.container}>
                     <div className={styles.imageWrapper}>
-                        <img src={item.image_url} alt={item.title} />
+                        <img
+                            src={item.image_url}
+                            srcSet={`${item.image_url}-160.webp 160w,
+                                ${item.image_url}-300.webp 300w,
+                                ${item.image_url}-600.webp 600w`}
+                            sizes="(max-width: 600px) 325px, 400px"
+                            alt={item.title}
+                        />
                     </div>
                     <div className={styles.details}>
                         <div className={styles.header}>
