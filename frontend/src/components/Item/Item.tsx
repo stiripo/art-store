@@ -1,11 +1,14 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Heart } from 'lucide-react';
-import type { CollectionItem, ItemProps } from "../../types";
-import styles from "./Item.module.scss"
+import type { CollectionItem } from "../../types";
+import styles from "./Item.module.scss";
+import { FavoritesContext } from "../../FavoritesContext";
 
 
-export function Item({ favorites, toggleFavorites }: ItemProps) {
+export function Item() {
+
+    const { favorites, toggleFavorites } = useContext(FavoritesContext)!;
 
     const { id } = useParams();
 
@@ -31,7 +34,6 @@ export function Item({ favorites, toggleFavorites }: ItemProps) {
 
     useEffect(() => {
         fetchItem();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
 
     return (

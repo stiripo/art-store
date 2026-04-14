@@ -2,8 +2,12 @@ import type { WishlistProps } from "../../types"
 import { Link } from "react-router-dom"
 import styles from "./Wishlist.module.scss"
 import { Heart } from 'lucide-react'
+import { useContext } from "react"
+import { FavoritesContext } from "../../FavoritesContext"
 
-export function Wishlist({ collection, favorites, onRemove }: WishlistProps) {
+export function Wishlist({ collection, onRemove }: WishlistProps) {
+
+	const { favorites } = useContext(FavoritesContext)!;
 
 	const favoriteItems = collection.filter(item => favorites.has(item.id))
 
