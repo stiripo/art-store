@@ -3,7 +3,7 @@ import { useEffect, useState, useContext } from "react";
 import { Heart } from 'lucide-react';
 import type { CollectionItem } from "../../types";
 import styles from "./Item.module.scss";
-import { FavoritesContext } from "../../FavoritesContext";
+import { FavoritesContext } from "../../context/FavoritesContext";
 
 
 export function Item() {

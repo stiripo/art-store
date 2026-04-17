@@ -1,8 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
-import { getFavoritesFromLocalStorage } from "./utils";
 import { useState, useEffect, lazy, Suspense } from 'react';
 import type { CollectionItem } from './types';
-import { FavoritesContext } from "./FavoritesContext";
+import { FavoritesProvider } from './context/FavoritesProvider';
 
 const Collection = lazy(() => import('./components/Collection/Collection').then(m => ({ default: m.Collection })));
 const Item = lazy(() => import('./components/Item/Item').then(m => ({ default: m.Item })));
@@ -12,19 +11,6 @@ function App() {
 
   const [collection, setCollection] = useState<CollectionItem[]>([]);
   const [loading, setLoading] = useState(true);
-  const [favorites, setFavorites] = useState<Set<number>>(() => new Set(getFavoritesFromLocalStorage()));
-
-  const handleFavorites = (id: number): void => {
-    setFavorites(prev => {
-      const updated = new Set(prev);
-      if (updated.has(id)) {
-        updated.delete(id);
-      } else {
-        updated.add(id);
-      }
-      return updated;
-    });
-  }
 
   const fetchCollection = async (): Promise<void> => {
     try {
@@ -48,13 +34,9 @@ function App() {
     fetchCollection();
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem('favorites', JSON.stringify([...favorites]));
-  }, [favorites]);
-
 
   return (
-    <FavoritesContext value={{ favorites, toggleFavorites: handleFavorites }}>
+    <FavoritesProvider>
       <Suspense fallback={<div aria-busy="true">Loading...</div>}>
         <Routes>
           <Route
@@ -80,7 +62,6 @@ function App() {
             element={
               <Wishlist
                 collection={collection}
-                onRemove={handleFavorites}
               />
             }>
           </Route>
@@ -90,7 +71,7 @@ function App() {
           </Route>
         </Routes>
       </Suspense>
-    </FavoritesContext>
+    </FavoritesProvider>
   )
 }
 

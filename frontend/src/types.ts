@@ -14,7 +14,6 @@ export interface CollectionProps {
 
 export interface WishlistProps {
     collection: CollectionItem[],
-    onRemove: (id: number) => void,
 }
 
 export type FavoritesContextType = {

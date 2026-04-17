@@ -4,7 +4,7 @@ import styles from "./Collection.module.scss";
 import { Link } from "react-router-dom";
 import { Heart } from 'lucide-react';
 import type { CollectionProps } from "../../types";
-import { FavoritesContext } from "../../FavoritesContext";
+import { FavoritesContext } from "../../context/FavoritesContext";
 
 
 export function Collection({ collection, loading }: CollectionProps) {
