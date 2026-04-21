@@ -7,16 +7,13 @@ currency?: string,
 category: string,
 medium?: string}
 
-export interface CollectionProps {
-    collection: CollectionItem[],
-    loading: boolean
-}
-
-export interface WishlistProps {
-    collection: CollectionItem[],
-}
 
 export type FavoritesContextType = {
   favorites: Set<number>;
   toggleFavorites: (id: number) => void;
 };
+
+export type CollectionContextType = {
+    collection: CollectionItem[],
+    loading: boolean,
+}

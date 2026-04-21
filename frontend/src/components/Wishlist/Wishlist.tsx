@@ -1,13 +1,13 @@
-import type { WishlistProps } from "../../types"
 import { Link } from "react-router-dom"
 import styles from "./Wishlist.module.scss"
 import { Heart } from 'lucide-react'
-import { useContext } from "react"
-import { FavoritesContext } from "../../context/FavoritesContext"
+import { useFavorites } from "../../context/FavoritesContext"
+import { useCollection } from "../../context/CollectionContext"
 
-export function Wishlist({ collection }: WishlistProps) {
+export function Wishlist() {
 
-	const { favorites, toggleFavorites } = useContext(FavoritesContext)!;
+	const { collection } = useCollection();
+	const { favorites, toggleFavorites } = useFavorites();
 
 	const favoriteItems = collection.filter(item => favorites.has(item.id))
 
@@ -28,7 +28,7 @@ export function Wishlist({ collection }: WishlistProps) {
 										srcSet={`${item.image_url}-160.webp 160w,
 										${item.image_url}-300.webp 300w,
                                                     ${item.image_url}-600.webp 600w`}
-													sizes="84px"
+										sizes="84px"
 										alt={item.title} />
 								</div>
 
@@ -41,7 +41,7 @@ export function Wishlist({ collection }: WishlistProps) {
 							<button
 								type="button"
 								className={styles.removeButton}
-								onClick={() => toggleFavorites (item.id)}
+								onClick={() => toggleFavorites(item.id)}
 								aria-label={`Remove ${item.title} from wishlist`}
 							>
 								<Heart
