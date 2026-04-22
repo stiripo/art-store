@@ -1,6 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { useState, useEffect, lazy, Suspense } from 'react';
-import type { CollectionItem } from './types';
+import { lazy, Suspense } from 'react';
 import { FavoritesProvider } from './context/FavoritesProvider';
 import { CollectionProvider } from './context/CollectionProvider';
 

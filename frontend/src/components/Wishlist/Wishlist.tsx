@@ -8,7 +8,6 @@ export function Wishlist() {
 
 	const { collection } = useCollection();
 	const { favorites, toggleFavorites } = useFavorites();
-
 	const favoriteItems = collection.filter(item => favorites.has(item.id))
 
 	return (
@@ -31,7 +30,6 @@ export function Wishlist() {
 										sizes="84px"
 										alt={item.title} />
 								</div>
-
 								<div className={styles.details}>
 									<div className={styles.itemTitle}>{item.title}</div>
 									<div className={styles.medium}>{item.medium}</div>

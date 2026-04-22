@@ -35,6 +35,4 @@ export function CollectionProvider({ children }: { children: React.ReactNode }) 
             {children}
         </CollectionContext>
     )
-
-
 }

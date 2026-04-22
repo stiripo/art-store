@@ -7,12 +7,10 @@ import { FavoritesContext } from "../../context/FavoritesContext";
 import { useCollection } from "../../context/CollectionContext";
 
 
-
 export function Collection() {
 
     const { collection, loading } = useCollection();
     const { favorites, toggleFavorites } = useContext(FavoritesContext)!;
-
     const [filterCategory, setFilterCategory] = useState<string>('All');
 
     const filteredCollection = useMemo(() => {
@@ -89,13 +87,10 @@ export function Collection() {
                                                 <div className={styles.name}>{item.title}</div>
                                                 <div>{item.price} <span>{item.currency}</span></div>
                                             </div>
-
                                         </article>
-
                                     </li>
                                 ))}
                             </ul>
-
                         </div>
                     </section>
                 </section>

@@ -1,19 +1,17 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { Heart } from 'lucide-react';
 import type { CollectionItem } from "../../types";
 import styles from "./Item.module.scss";
-import { FavoritesContext } from "../../context/FavoritesContext";
+import { useFavorites } from "../../context/FavoritesContext";
 
 
 export function Item() {
 
-    const { favorites, toggleFavorites } = useContext(FavoritesContext)!;
-
-    const { id } = useParams();
-
+    const { favorites, toggleFavorites } = useFavorites();
     const [item, setItem] = useState<CollectionItem>({} as CollectionItem);
     const [error, setError] = useState<string | null>(null);
+    const { id } = useParams();
 
     const fetchItem = async () => {
         try {

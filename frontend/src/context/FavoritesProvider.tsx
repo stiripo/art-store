@@ -27,6 +27,4 @@ export function FavoritesProvider({ children }: { children: React.ReactNode }) {
       {children}
     </FavoritesContext>
   )
-
-
 }

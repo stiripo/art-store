@@ -7,7 +7,6 @@ currency?: string,
 category: string,
 medium?: string}
 
-
 export type FavoritesContextType = {
   favorites: Set<number>;
   toggleFavorites: (id: number) => void;
