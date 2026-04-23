@@ -14,28 +14,10 @@ function App() {
       <FavoritesProvider>
         <Suspense fallback={<div aria-busy="true">Loading...</div>}>
           <Routes>
-            <Route
-              path='/'
-              element={
-                <Collection />
-              }>
-            </Route>
-            <Route
-              path='collection'
-              element={
-                <Collection />
-              }>
-            </Route>
-            <Route
-              path='wishlist'
-              element={
-                <Wishlist />
-              }>
-            </Route>
-            <Route
-              path='collection/:id'
-              element={<Item />}>
-            </Route>
+            <Route path='/' element={<Collection />} />
+            <Route path='collection' element={<Collection />} />
+            <Route path='wishlist' element={<Wishlist />} />
+            <Route path='collection/:id' element={<Item />} />
           </Routes>
         </Suspense>
       </FavoritesProvider>

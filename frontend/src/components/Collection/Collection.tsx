@@ -1,16 +1,17 @@
-import { useState, useMemo, useContext } from "react";
+import { useState, useMemo } from "react";
 import { FilterForm } from "../FilterForm/FilterForm";
 import styles from "./Collection.module.scss";
 import { Link } from "react-router-dom";
 import { Heart } from 'lucide-react';
 import { FavoritesContext } from "../../context/FavoritesContext";
 import { useCollection } from "../../context/CollectionContext";
+import  {useFavorites} from "../../context/FavoritesContext";
 
 
 export function Collection() {
 
     const { collection, loading } = useCollection();
-    const { favorites, toggleFavorites } = useContext(FavoritesContext)!;
+    const { favorites, toggleFavorites } = useFavorites();
     const [filterCategory, setFilterCategory] = useState<string>('All');
 
     const filteredCollection = useMemo(() => {

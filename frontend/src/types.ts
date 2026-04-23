@@ -5,7 +5,14 @@ image_url: string,
 price?: number,
 currency?: string,
 category: string,
-medium?: string}
+medium?: string
+};
+
+export interface FilterFormProps {
+    categories: string[],
+    filterCategory: string,
+    onFilterChange: (category: string) => void,
+}
 
 export type FavoritesContextType = {
   favorites: Set<number>;

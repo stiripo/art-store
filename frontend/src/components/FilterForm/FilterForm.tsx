@@ -1,12 +1,7 @@
 import { memo } from 'react';
 import styles from './FilterForm.module.scss';
+import type { FilterFormProps } from '../../types';
 
-
-interface FilterFormProps {
-    categories: string[],
-    filterCategory: string,
-    onFilterChange: (category: string) => void,
-}
 
 export const FilterForm = memo(function FilterForm({ categories, filterCategory, onFilterChange }: FilterFormProps) {
 
@@ -30,7 +25,6 @@ export const FilterForm = memo(function FilterForm({ categories, filterCategory,
                     <div>{options}</div>
                 </div>
             </fieldset>
-
         </form>
     )
 })
