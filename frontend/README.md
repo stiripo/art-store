@@ -1,73 +1,60 @@
-# React + TypeScript + Vite
+Art Store
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack gallery app showcasing my digital paintings.
 
-Currently, two official plugins are available:
+Tech Stack:
+Frontend: React, TypeScript, Vite
+Backend: Node.js, Express.js
+Database: PostgreSQL (via pg-promise)
+Testing: Vitest + vitest-browser-react
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## React Compiler
+Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Gallery & Filtering
+Artworks are fetched from a REST API and displayed in a responsive grid. A radio-based filter lets users browse by category, with the filtered count updated live via an ARIA live region.
 
-## Expanding the ESLint configuration
+Favorites / Wishlist
+Users can heart any artwork from the gallery or detail view to add it to a wishlist. Favorites persist across sessions using localStorage. The wishlist is its own route with a dedicated page.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Item Detail View
+Clicking an artwork navigates to a dedicated page (/collection/:id) that fetches the individual item from the API and displays full details.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Routing
+Client-side routing with React Router. Routes: /, /collection, /wishlist, /collection/:id.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+State Management
+This project was my first hands-on experience with the Context API. State is split into two providers:
+CollectionProvider — fetches and caches the full collection from the backend, shared across all pages to avoid redundant requests.
+FavoritesProvider — manages the Set<number> of favorited IDs, syncs to localStorage, and exposes a toggleFavorites action.
+Both are consumed via custom hooks (useCollection, useFavorites) rather than calling useContext directly in components.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Performance
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Images use srcset with multiple .webp sizes (160w / 300w / 600w) and sizes for responsive loading
+Above-the-fold images use loading="eager" + fetchPriority="high"; the rest are lazy-loaded
+The FilterForm component is wrapped in React.memo to skip re-renders when collection data updates
+Filtered/sorted values are derived with useMemo
+Route components are code-split using React.lazy + Suspense
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Accessibility
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Filter inputs use a proper <fieldset> / <legend> / radio group
+Favorite buttons have aria-pressed state and descriptive aria-labels
+Dynamic content updates (item count, wishlist changes) use aria-live="polite"
+All images have meaningful alt text
+
+
+Backend
+A lightweight Express server exposes a REST API for the collection:
+GET/collection - Fetch all artworks
+GET/collection/:id - Fetch single artwork
+POST/collection - Add new artwork
+PATCH/collection/:id - Update artwork
+DELETE/collection/:id - Delete artwork
+PostgreSQL is connected via pg-promise.
+
+Testing
+Browser-mode tests with Vitest and vitest-browser-react.
+API calls are intercepted with MSW (Mock Service Worker) via a browser worker.
+
