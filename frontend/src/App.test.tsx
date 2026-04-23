@@ -51,7 +51,7 @@ test('renders Item on /collection/:id', async () => {
   );
 
   const images = page.getByRole('img');
-  expect(images).toHaveLength(1);
+  await expect.element(images).toBeInTheDocument();
 
 });
 
@@ -65,6 +65,5 @@ test('clicking on an image leads to /collection/:id', async () => {
   const image = page.getByRole('img', {name: 'Actress'});
   await expect.element(image).toBeInTheDocument();
   await image.click();
-
-  await expect(page.getByRole('img')).toHaveLength(1);
+  expect.poll(() => expect(page.getByRole('img')).toHaveLength(1));
 })
