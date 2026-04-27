@@ -15,7 +15,7 @@ export function Item() {
 
     const fetchItem = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/collection/${id}`);
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/collection/${id}`);
             if (!response.ok) {
                 throw new Error('Error fetching data')
             }
