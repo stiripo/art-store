@@ -5,9 +5,9 @@ import { getAllItems, getItemById, addItem, deleteItemById, updateItemById } fro
 import cors from 'cors';
 
 const app = express();
-const port: number = 8080;
+const port = process.env.PORT ? parseInt(process.env.PORT) : 8080;
 
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({ origin: process.env.CLIENT_URL ?? 'http://localhost:5173' }));
 app.use(express.json());
 app.use(express.static('public'));
 
