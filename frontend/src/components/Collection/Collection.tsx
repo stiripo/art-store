@@ -3,7 +3,6 @@ import { FilterForm } from "../FilterForm/FilterForm";
 import styles from "./Collection.module.scss";
 import { Link } from "react-router-dom";
 import { Heart } from 'lucide-react';
-import { FavoritesContext } from "../../context/FavoritesContext";
 import { useCollection } from "../../context/CollectionContext";
 import  {useFavorites} from "../../context/FavoritesContext";
 
