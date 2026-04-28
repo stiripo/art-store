@@ -1,7 +1,7 @@
 import express, { type Response, type Request } from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { getAllItems, getItemById, addItem, deleteItemById, updateItemById } from './controllers.ts';
+import { getAllItems, getItemById, addItem, deleteItemById, updateItemById } from './controllers.js';
 import cors from 'cors';
 
 const app = express();
