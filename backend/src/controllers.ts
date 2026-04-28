@@ -1,6 +1,6 @@
 import { type Request, type Response } from "express";
-import type { CollectionItem } from "./types.ts";
-import { db } from "./db.ts";
+import type { CollectionItem } from "./types.js";
+import { db } from "./db.js";
 import pgPromise from 'pg-promise';
 
 const pgp = pgPromise();
