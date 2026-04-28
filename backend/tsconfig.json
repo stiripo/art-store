@@ -19,8 +19,6 @@
     // Other Outputs
     // "sourceMap": true,
     "declaration": true,
-    "emitDeclarationOnly": true,
-    "allowImportingTsExtensions": true, 
     // "declarationMap": true,
 
     // Stricter Typechecking Options
